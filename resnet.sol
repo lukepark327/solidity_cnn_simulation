@@ -77,5 +77,6 @@ contract resnet {
         }
         
         return (_W2, _H2, D1);
-    }    
+    }
+    
 }
