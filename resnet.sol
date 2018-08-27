@@ -28,7 +28,8 @@ contract resnet {
            
            for(j=0; j<F * F * D1; j++){
                // fixed point mul.
-               sum += (3/4 + 1/2*1/2);
+               // sum = sum + real * real
+               sum = (3/4 + 1/2*1/2);
            }
        }
        
@@ -70,7 +71,8 @@ contract resnet {
             uint32 sum=0;
             
             for(j=0; j<F * F; j++){
-                sum += (1.5 + 1.5);    
+                // sum = sum + real
+                sum = (1.5 + 1.5);    
             }
             
             sum /= (F * F);
@@ -78,5 +80,4 @@ contract resnet {
         
         return (_W2, _H2, D1);
     }
-    
 }
