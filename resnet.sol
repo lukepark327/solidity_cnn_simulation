@@ -5,6 +5,7 @@ contract resnet {
     event logging(uint32);
     
     function convNextLayer(uint16 W1, uint16 H1, uint16 F, uint16 S, uint16 P)
+        public pure
     returns(uint16 W2, uint16 H2) {
        return ((W1 - F + 2*P) / S + 1, H2 = (H1 - F + 2*P) / S + 1); 
     }
@@ -14,8 +15,9 @@ contract resnet {
     // The stride           : S
     // The amount of padding: P
     function conv(uint16 W1, uint16 H1, uint16 D1, uint16 K, uint16 F, uint16 S, uint16 P)
+        public
     returns(uint16 W2, uint16 H2, uint16 D2) {
-       var (_W2, _H2) = convNextLayer(W1, H1, F, S, P);
+        (uint16 _W2, uint16 _H2) = convNextLayer(W1, H1, F, S, P);
        
        // Loop num.
        emit logging(uint32(_W2 * _H2 * K) * uint32(F * F * D1));
@@ -37,6 +39,7 @@ contract resnet {
     }
     
     function relu(uint16 W1, uint16 H1, uint16 D1)
+        public
     returns(uint16 W2, uint16 H2, uint16 D2) {
         uint8 tmp=0;
        
@@ -57,6 +60,7 @@ contract resnet {
 
     // average POOL
     function pool(uint16 W1, uint16 H1, uint16 D1, uint16 F, uint16 S)
+        public
     returns(uint16 W2, uint16 H2, uint16 D2) {
         uint16 _W2 = (W1 - F) / S + 1;
         uint16 _H2 = (H1 - F) / S + 1;
